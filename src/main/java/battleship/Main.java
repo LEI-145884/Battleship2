@@ -3,8 +3,7 @@
  */
 package battleship;
 
-public class Main
-{
+public class Main{
 	/**
 	 * Main.
 	 *
