@@ -134,6 +134,16 @@
 			<scope>compile</scope>
 		</dependency>
 
+    <!--feature1 -->
+    <!-- Source: https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
+    <dependency>
+        <groupId>org.apache.pdfbox</groupId>
+        <artifactId>pdfbox</artifactId>
+        <version>3.0.8</version>
+        <scope>compile</scope>
+    </dependency>
+    
+    <!-- clock feature -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
