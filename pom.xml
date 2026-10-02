@@ -134,6 +134,10 @@
 			<scope>compile</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-controls</artifactId>
+			<version>21.0.2</version>
     <!--feature1 -->
     <!-- Source: https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
     <dependency>
