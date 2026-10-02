@@ -168,11 +168,15 @@ public class Game implements IGame
 	private Integer countHits;
 	private Integer countSinks;
 	private int moveNumber;
+	private final MoveTimer moveTimer;
 
 	//------------------------------------------------------------------
 	public Game(IFleet myFleet)
 	{
 		this.moveNumber = 1;
+
+		this.moveTimer = new MoveTimer();
+		this.moveTimer.startMove();
 
 		this.alienMoves = new ArrayList<IMove>();
 		this.myMoves = new ArrayList<IMove>();
@@ -354,7 +358,11 @@ public class Game implements IGame
 
 		alienMoves.add(move);
 
+		long elapsed = moveTimer.stopMove();
+		System.out.println("Rajada " + moveNumber + " demorou " + MoveTimer.format(elapsed));
+
 		moveNumber++;
+		moveTimer.startMove();
 	}
 
 	/**
@@ -448,6 +456,7 @@ public class Game implements IGame
 
 	public void over() {
 			System.out.println();
+			System.out.println("Tempo total de jogo: " + MoveTimer.format(moveTimer.getTotalMillis()));
 			System.out.println("+--------------------------------------------------------------+");
 			System.out.println("| Maldito sejas, Java Sparrow, eu voltarei, glub glub glub ... |");
 			System.out.println("+--------------------------------------------------------------+");
