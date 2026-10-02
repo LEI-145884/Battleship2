@@ -32,6 +32,7 @@ public class Tasks {
 	private static final String MAPA = "mapa";
 	private static final String STATUS = "estado";
 	private static final String SIMULA = "simula";
+    private static final String PDF = "pdf";
 
 	/**
 	 * This task also tests the fighting element of a round of three shots
@@ -101,6 +102,16 @@ public class Tasks {
 					if (game != null)
 						game.printMyBoard(true, true);
 					break;
+                case PDF:
+                    if (game != null) {
+                        try {
+                            PdfExporter.exportMoves(game.getAlienMoves(), "battleship-moves.pdf");
+                            System.out.println("PDF criado: battleship-moves.pdf");
+                        } catch (Exception e) {
+                            System.out.println("Erro ao criar o PDF: " + e.getMessage());
+                        }
+                    }
+                    break;
                 case AJUDA:
                     menuHelp();
                     break;
@@ -126,6 +137,7 @@ public class Tasks {
 		System.out.println("- " + RAJADA + ": Realiza uma rajada de disparos.");
 		System.out.println("- " + SIMULA + ": Simula um jogo completo.");
 		System.out.println("- " + TIROS + ": Lista os tiros válidos realizados (* = tiro em navio, o = tiro na água)");
+        System.out.println("- " + PDF + ": Cria um PDF com as jogadas realizadas.");
 		System.out.println("- " + DESISTIR + ": Encerra o jogo.");
 		System.out.println("===============================================================");
 	}

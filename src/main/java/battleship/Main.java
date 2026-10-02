@@ -3,22 +3,27 @@ package battleship;
 import javafx.application.Application;
 
 public class Main {
-	public static void main(String[] args) {
-		System.out.println("*** Arrancar Battleship Gráfico ***");
+    /**
+     * Main.
+     *
+     * @param args the args
+     */
+    public static void main(String[] args) {
+        System.out.println("***  Battleship  ***");
 
-		// 1. Criar uma frota aleatória e um jogo usando as tuas lógicas
-		IFleet myFleet = Fleet.createRandom();
-		Game game = new Game(myFleet);
+        System.out.println("*** Arrancar Battleship Gráfico ***");
 
-		// 2. Simular uma rajada inimiga para vermos tiros vermelhos/brancos no ecrã
-		game.randomEnemyFire();
+        // 1. Criar uma frota aleatória e um jogo usando as tuas lógicas
+        IFleet myFleet = Fleet.createRandom();
+        Game game = new Game(myFleet);
 
-		// 3. Injetar o jogo na interface gráfica
-		GraphicBoard.currentGame = game;
+        // 2. Simular uma rajada inimiga para vermos tiros vermelhos/brancos no ecrã
+        game.randomEnemyFire();
 
-		// 4. Iniciar o JavaFX de forma segura (sem dar o erro de módulos)
-		Application.launch(GraphicBoard.class, args);
+        // 3. Injetar o jogo na interface gráfica
+        GraphicBoard.currentGame = game;
 
-		// Nota: Removi o Tasks.menu() provisoriamente para o foco estar na janela gráfica.
-	}
+        // 4. Iniciar o JavaFX de forma segura (sem dar o erro de módulos)
+        Application.launch(GraphicBoard.class, args);
+    }
 }
