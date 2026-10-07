@@ -32,7 +32,6 @@ public class Tasks {
 	private static final String MAPA = "mapa";
 	private static final String STATUS = "estado";
 	private static final String SIMULA = "simula";
-    private static final String PDF = "pdf";
 
 	/**
 	 * This task also tests the fighting element of a round of three shots
@@ -53,25 +52,40 @@ public class Tasks {
 					myFleet = Fleet.createRandom();
 					game = new Game(myFleet);
 					game.printMyBoard(false, true);
+
+					// Atualizar interface visual
+					GraphicBoard.currentGame = game;
+					GraphicBoard.drawBoard();
 					break;
 				case LEFROTA:
 					myFleet = buildFleet(in);
 					game = new Game(myFleet);
 					game.printMyBoard(false, true);
+
+					// Atualizar interface visual
+					GraphicBoard.currentGame = game;
+					GraphicBoard.drawBoard();
 					break;
 				case STATUS:
 					if (myFleet != null)
 						myFleet.printStatus();
 					break;
 				case MAPA:
-					if (myFleet != null)
+					if (myFleet != null) {
 						game.printMyBoard(false, true);
+						// Opcional: forçar redesenho se a janela se perder
+						GraphicBoard.drawBoard();
+					}
 					break;
 				case RAJADA:
 					if (game != null) {
 						game.readEnemyFire(in);
 						myFleet.printStatus();
 						game.printMyBoard(true, false);
+
+						// Atualizar interface visual com os tiros vermelhos/brancos
+						GraphicBoard.currentGame = game;
+						GraphicBoard.drawBoard();
 
 						if (game.getRemainingShips() == 0) {
 							game.over();
@@ -85,10 +99,15 @@ public class Tasks {
 							game.randomEnemyFire();
 							myFleet.printStatus();
 							game.printMyBoard(true, false);
+
+							// Atualizar interface visual passo a passo
+							GraphicBoard.currentGame = game;
+							GraphicBoard.drawBoard();
+
 							try {
 								Thread.sleep(3000);
 							} catch (InterruptedException e) {
-								Thread.currentThread().interrupt(); // Best practice: restore interrupt status
+								Thread.currentThread().interrupt();
 							}
 						}
 
@@ -102,19 +121,9 @@ public class Tasks {
 					if (game != null)
 						game.printMyBoard(true, true);
 					break;
-                case PDF:
-                    if (game != null) {
-                        try {
-                            PdfExporter.exportMoves(game.getAlienMoves(), "battleship-moves.pdf");
-                            System.out.println("PDF criado: battleship-moves.pdf");
-                        } catch (Exception e) {
-                            System.out.println("Erro ao criar o PDF: " + e.getMessage());
-                        }
-                    }
-                    break;
-                case AJUDA:
-                    menuHelp();
-                    break;
+				case AJUDA:
+					menuHelp();
+					break;
 				default:
 					System.out.println("Que comando é esse??? Repete ...");
 			}
@@ -132,12 +141,11 @@ public class Tasks {
 		System.out.println("Digite um dos comandos abaixo para interagir com o jogo:");
 		System.out.println("- " + GERAFROTA + ": Gera uma frota aleatória de navios.");
 		System.out.println("- " + LEFROTA + ": Permite criar e carregar uma frota personalizada.");
-		System.out.println("- " + STATUS + ": Mostra o status atual da frota.)");
+		System.out.println("- " + STATUS + ": Mostra o status atual da frota.");
 		System.out.println("- " + MAPA + ": Exibe o mapa da frota.");
 		System.out.println("- " + RAJADA + ": Realiza uma rajada de disparos.");
 		System.out.println("- " + SIMULA + ": Simula um jogo completo.");
 		System.out.println("- " + TIROS + ": Lista os tiros válidos realizados (* = tiro em navio, o = tiro na água)");
-        System.out.println("- " + PDF + ": Cria um PDF com as jogadas realizadas.");
 		System.out.println("- " + DESISTIR + ": Encerra o jogo.");
 		System.out.println("===============================================================");
 	}
