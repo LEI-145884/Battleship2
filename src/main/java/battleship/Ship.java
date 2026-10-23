@@ -432,4 +432,14 @@ public abstract class Ship implements IShip
 	return "[" + category + " " + bearing + " " + pos + "]";
     }
 
+
+
+	/**
+	 * Método criado exclusivamente para testar o Quality Gate do Qodana
+	 * (aproximação ao Data Clumps através de MethodWithTooManyParameters).
+	 */
+	public void testarCheiroDataClumps(int p1, String p2, boolean p3, double p4, int p5) {
+		// O Qodana vai chumbar este código porque tem 5 parâmetros (o limite foi definido para 4).
+		System.out.println("Forçar falha na Action do GitHub.");
+	}
 }
