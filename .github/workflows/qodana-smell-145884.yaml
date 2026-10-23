@@ -23,5 +23,6 @@ jobs:
         with:
           args: --config qodana-145884.yaml --profile-path /data/project/.qodana/profiles/profile-145884.yaml
           pr-mode: false
+          upload-result: true
           use-annotations: true
           post-pr-comment: true
