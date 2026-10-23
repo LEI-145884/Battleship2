@@ -22,7 +22,7 @@ public class Barge extends Ship {
 		// Add the single position of the barge to the list of positions
 		getPositions().add(new Position(pos.getRow(), pos.getColumn()));
 	}
-    public void ThisMethodNameIsWrong() {
+    public void thisMethodNameIsWrong() {
         System.out.println("Checkstyle will flag this because it starts with a capital letter.");
     }
 }
