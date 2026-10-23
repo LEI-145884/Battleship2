@@ -1,5 +1,5 @@
 # 122708 - Hugo Barroso
-name: Qodana smell gate 12345
+name: Qodana smell gate 122708
 on:
   pull_request:
   push:
