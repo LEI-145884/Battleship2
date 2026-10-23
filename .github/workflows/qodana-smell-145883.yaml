@@ -22,7 +22,7 @@ jobs:
           fetch-depth: 0
       - uses: JetBrains/qodana-action@v2026.2
         with:
-          args: --config qodana.yaml
+          args: --config qodana-145883.yaml
           use-annotations: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
