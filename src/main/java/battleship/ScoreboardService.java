@@ -1,5 +1,13 @@
 package battleship;
 
+// Added unused primitves to detect primtive obsession code smell
+private int rawScoreValue;
+private int rawPlayerId;
+private int rawGameDurationSeconds;
+private int rawTimestampDay;
+private int rawTimestampMonth;
+private int rawTimestampYear;
+
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
