@@ -1,0 +1,9 @@
+# 122714 - Mafalda Costa
+profile:
+  base:
+    name: empty
+  inspections:
+    - inspection: FieldCount
+      enabled: true
+      options:
+        m_limit: 18
