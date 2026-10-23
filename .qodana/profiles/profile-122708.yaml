@@ -6,4 +6,4 @@ profile:
     - inspection: MethodWithTooManyParameters
       enabled: true
       options:
-        m_limit: 4
+        limit: 4
