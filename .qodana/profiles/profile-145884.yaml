@@ -7,13 +7,13 @@ profile:
     name: empty
   inspections:
     # WMC >= VERY HIGH (book Table 2.2, Java: 47)
-    - inspection: OverlyComplexClass
+    - inspection: ClassComplexity
       enabled: true
       severity: WARNING
       options:
         m_limit: 46
     # Size proxy, not part of the book's God Class rule: NOM >= VERY HIGH (book Table 2.2, Java: 15)
-    - inspection: ClassWithTooManyMethods
+    - inspection: MethodCount
       enabled: true
       severity: WARNING
       options:
