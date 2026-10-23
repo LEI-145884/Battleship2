@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Run Checkstyle
-        uses: dbeloved/action-checkstyle@v1
+        uses: nikitasavinov/checkstyle-action@1.0.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           checkstyle_config: checkstyle-145883.xml
