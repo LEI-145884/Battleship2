@@ -1,0 +1,9 @@
+# 122708 - Hugo Barroso
+profile:
+  base:
+    name: empty
+inspections:
+  - inspection: MethodWithTooManyParameters   # confirmar o ID no perfil exportado do IDE
+    enabled: true
+    options:
+      m_limit: 4                              # confirmar o nome da opção no perfil exportado

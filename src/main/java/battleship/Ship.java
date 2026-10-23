@@ -432,4 +432,9 @@ public abstract class Ship implements IShip
 	return "[" + category + " " + bearing + " " + pos + "]";
     }
 
+	// SMELL INTENCIONAL (Long Parameter List) - remover no commit de correção
+	public void registarTiro(int linha, int coluna, String navio, boolean acertou,
+							 boolean afundou, int ronda, long tempo,
+							 String jogador, String origem) {
+	}
 }
