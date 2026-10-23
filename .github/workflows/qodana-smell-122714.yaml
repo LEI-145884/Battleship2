@@ -17,12 +17,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          fetch-depth: 0
 
       - uses: JetBrains/qodana-action@v2026.2
         with:
-          args: --config qodana-122714.yaml
+          args: --config,qodana-122714.yaml
           use-annotations: true
           post-pr-comment: true
