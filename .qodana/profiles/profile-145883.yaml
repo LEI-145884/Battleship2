@@ -1,0 +1,13 @@
+#145883 - Kseniya Fedartsova
+profile:
+  base:
+    name: empty
+  inspections:
+    - inspection: NonCommentSourceStatements
+      enabled: true
+      options:
+        m_limit: 30
+    - inspection: CyclomaticComplexity
+      enabled: true
+      options:
+        m_limit: 10

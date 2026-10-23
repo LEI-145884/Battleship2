@@ -1,0 +1,20 @@
+# 145884 - Lukasz Swiecicki
+# Large Class (Fowler) ~ God Class (Lanza & Marinescu, p. 80-81), approximated with Qodana.
+# The inspection fires when the metric EXCEEDS m_limit, so "WMC >= 47" is written as m_limit: 46.
+version: "1.0"
+profile:
+  base:
+    name: empty
+  inspections:
+    # WMC >= VERY HIGH (book Table 2.2, Java: 47)
+    - inspection: ClassComplexity
+      enabled: true
+      severity: WARNING
+      options:
+        m_limit: 46
+    # Size proxy, not part of the book's God Class rule: NOM >= VERY HIGH (book Table 2.2, Java: 15)
+    - inspection: MethodCount
+      enabled: true
+      severity: WARNING
+      options:
+        m_limit: 14

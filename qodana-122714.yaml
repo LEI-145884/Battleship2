@@ -1,0 +1,16 @@
+# 122714 - Mafalda Costa
+version: "1.0"
+linter: jetbrains/qodana-jvm-community:2026.2
+projectJDK: "23"
+
+# Desativa todas as inspeções globais do Qodana
+exclude:
+  - name: All
+
+# Ativa apenas a inspeção pretendida
+include:
+  - name: FieldCount
+
+failureConditions:
+  severityThresholds:
+    any: 0
