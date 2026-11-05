@@ -2,8 +2,16 @@
 profile:
   base:
     name: empty
-inspections:
-  - inspection: MethodWithTooManyParameters   # confirmar o ID no perfil exportado do IDE
-    enabled: true
-    options:
-      m_limit: 4                              # confirmar o nome da opção no perfil exportado
+  inspections:
+    # Long Parameter List - metodos
+    - inspection: ParametersPerMethod
+      enabled: true
+      severity: WARNING
+      options:
+        m_limit: 4          # reporta metodos com MAIS de 4 parametros (>= 5)
+    # Long Parameter List - construtores
+    - inspection: ParametersPerConstructor
+      enabled: true
+      severity: WARNING
+      options:
+        m_limit: 4          # reporta construtores com MAIS de 4 parametros (>= 5)
