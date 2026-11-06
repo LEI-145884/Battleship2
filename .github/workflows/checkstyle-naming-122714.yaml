@@ -1,0 +1,29 @@
+# 122714 - Mafalda Costa
+name: Checkstyle naming gate 122714
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  checks: write
+  pull-requests: write
+
+jobs:
+  checkstyle-parameter-name-122714:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: nikitasavinov/checkstyle-action@1.0.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          checkstyle_config: checkstyle/checkstyle-122714.xml
+          reporter: github-pr-check
+          level: error
+          filter_mode: nofilter
+          fail_level: any
+          tool_name: checkstyle-parameter-name-122714
