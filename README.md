@@ -217,6 +217,13 @@ mvn test
 > [!TIP]
 > Use the `-Dtest=ClassName` flag to run specific test suites during development.
 
+### 🤖 Automated Testing (GitHub Actions)
+This project uses Continuous Integration (CI) to ensure code stability. A GitHub Actions workflow is configured in `.github/workflows/maven.yml` to automatically execute the full JUnit test suite using Apache Maven every time new code is pushed to any branch. 
+
+To view the test results:
+1. Go to the **Actions** tab in this repository.
+2. Click on the latest run of the **Java CI with Maven** workflow.
+3. Check the **Run JUnit Tests with Maven** step to see the detailed test output.
 ---
 
 ## 🤝 Contributing
