@@ -1,0 +1,186 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PdfExporter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">battleship</a>
+</div>
+
+<h1>Coverage Summary for Class: PdfExporter (battleship)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PdfExporter</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (31/31)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package battleship;
+&nbsp;
+&nbsp;import org.apache.pdfbox.pdmodel.PDDocument;
+&nbsp;import org.apache.pdfbox.pdmodel.PDPage;
+&nbsp;import org.apache.pdfbox.pdmodel.PDPageContentStream;
+&nbsp;import org.apache.pdfbox.pdmodel.common.PDRectangle;
+&nbsp;import org.apache.pdfbox.pdmodel.font.PDType1Font;
+&nbsp;import org.apache.pdfbox.pdmodel.font.Standard14Fonts;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.List;
+&nbsp;
+<b class="fc">&nbsp;public class PdfExporter {</b>
+&nbsp;
+&nbsp;    public static void exportMoves(List&lt;IMove&gt; moves, String fileName) throws IOException {
+&nbsp;
+<b class="fc">&nbsp;        try (PDDocument document = new PDDocument()) {</b>
+&nbsp;
+<b class="fc">&nbsp;            PDPage page = new PDPage(PDRectangle.A4);</b>
+<b class="fc">&nbsp;            document.addPage(page);</b>
+&nbsp;
+<b class="fc">&nbsp;            PDPageContentStream content = new PDPageContentStream(document, page);</b>
+&nbsp;
+<b class="fc">&nbsp;            PDType1Font font = new PDType1Font(Standard14Fonts.FontName.HELVETICA);</b>
+<b class="fc">&nbsp;            PDType1Font boldFont = new PDType1Font(Standard14Fonts.FontName.HELVETICA_BOLD);</b>
+&nbsp;
+<b class="fc">&nbsp;            float y = 750;</b>
+&nbsp;
+<b class="fc">&nbsp;            content.beginText();</b>
+<b class="fc">&nbsp;            content.setFont(boldFont, 18);</b>
+<b class="fc">&nbsp;            content.newLineAtOffset(50, y);</b>
+<b class="fc">&nbsp;            content.showText(&quot;Battleship - Game Moves&quot;);</b>
+<b class="fc">&nbsp;            content.endText();</b>
+&nbsp;
+<b class="fc">&nbsp;            y -= 40;</b>
+&nbsp;
+<b class="fc">&nbsp;            for (IMove move : moves) {</b>
+&nbsp;
+<b class="fc">&nbsp;                StringBuilder line = new StringBuilder();</b>
+<b class="fc">&nbsp;                line.append(&quot;Move &quot;).append(move.getNumber()).append(&quot;: &quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;                for (IPosition shot : move.getShots()) {</b>
+<b class="fc">&nbsp;                    line.append(shot.toString()).append(&quot; &quot;);</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                content.beginText();</b>
+<b class="fc">&nbsp;                content.setFont(font, 12);</b>
+<b class="fc">&nbsp;                content.newLineAtOffset(50, y);</b>
+<b class="fc">&nbsp;                content.showText(line.toString());</b>
+<b class="fc">&nbsp;                content.endText();</b>
+&nbsp;
+<b class="fc">&nbsp;                y -= 20;</b>
+&nbsp;
+<b class="fc">&nbsp;                if (y &lt; 50) {</b>
+&nbsp;                    content.close();
+&nbsp;
+<b class="fc">&nbsp;                    page = new PDPage(PDRectangle.A4);</b>
+<b class="fc">&nbsp;                    document.addPage(page);</b>
+&nbsp;
+<b class="fc">&nbsp;                    content = new PDPageContentStream(document, page);</b>
+<b class="fc">&nbsp;                    y = 750;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            content.close();
+&nbsp;
+<b class="fc">&nbsp;            document.save(fileName);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2026-11-06 15:29</div>
+</div>
+</body>
+</html>
