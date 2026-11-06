@@ -1,0 +1,31 @@
+# 122708 - Hugo Barroso
+name: Qodana smell gate 122708
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  checks: write
+  pull-requests: write
+
+jobs:
+  qodana-smell-122708:
+    name: qodana-smell-122708
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: Qodana Scan (Long Parameter List)
+        uses: JetBrains/qodana-action@v2026.2
+        with:
+          args: --config qodana-122708.yaml
+          pr-mode: false
+          use-annotations: true
+          post-pr-comment: true
+          upload-result: true

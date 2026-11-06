@@ -1,0 +1,17 @@
+# 122708 - Hugo Barroso
+profile:
+  base:
+    name: empty
+  inspections:
+    # Long Parameter List - metodos
+    - inspection: ParametersPerMethod
+      enabled: true
+      severity: WARNING
+      options:
+        m_limit: 4          # reporta metodos com MAIS de 4 parametros (>= 5)
+    # Long Parameter List - construtores
+    - inspection: ParametersPerConstructor
+      enabled: true
+      severity: WARNING
+      options:
+        m_limit: 4          # reporta construtores com MAIS de 4 parametros (>= 5)

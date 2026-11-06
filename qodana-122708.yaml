@@ -1,0 +1,11 @@
+# 122708 - Hugo Barroso
+version: "1.0"
+linter: jetbrains/qodana-jvm-community:2026.2
+projectJDK: "25"
+
+profile:
+  path: .qodana/profiles/profile-122708.xml
+
+failureConditions:
+  severityThresholds:
+    any: 0
