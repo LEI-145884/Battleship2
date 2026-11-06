@@ -1,0 +1,32 @@
+# 145884 - Lukasz Swiecicki
+name: Checkstyle ConstantName gate 145884
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  checks: write
+  pull-requests: write
+
+jobs:
+  checkstyle-constant-name-145884:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Checkstyle - ConstantName (UPPER_SNAKE_CASE)
+        uses: nikitasavinov/checkstyle-action@1.0.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          checkstyle_config: checkstyle-145884.xml
+          checkstyle_version: '13.9.0'
+          tool_name: checkstyle-145884
+          reporter: github-pr-check
+          level: error
+          # check the whole code base, not only the lines changed in the PR
+          filter_mode: nofilter
+          # make the job fail (red check) when there is any violation
+          fail_level: any

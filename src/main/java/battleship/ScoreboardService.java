@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ScoreboardService {
     private static final String FILE_PATH = "scoreboard.json";
-    private static final ObjectMapper mapper = new ObjectMapper();
+    private static final ObjectMapper MAPPER = new ObjectMapper();
 
     // Classe auxiliar simples para guardar cada registo
     public static class ScoreEntry {
@@ -32,7 +32,7 @@ public class ScoreboardService {
         try {
             List<ScoreEntry> scores = loadScores();
             scores.add(new ScoreEntry(totalShots, hits));
-            mapper.writerWithDefaultPrettyPrinter().writeValue(new File(FILE_PATH), scores);
+            MAPPER.writerWithDefaultPrettyPrinter().writeValue(new File(FILE_PATH), scores);
             System.out.println("[Scoreboard] Resultado do jogo guardado com sucesso em " + FILE_PATH);
         } catch (IOException e) {
             System.err.println("[Scoreboard] Erro ao guardar resultado: " + e.getMessage());
@@ -46,7 +46,7 @@ public class ScoreboardService {
             return new ArrayList<>();
         }
         try {
-            return mapper.readValue(file, mapper.getTypeFactory().constructCollectionType(List.class, ScoreEntry.class));
+            return MAPPER.readValue(file, MAPPER.getTypeFactory().constructCollectionType(List.class, ScoreEntry.class));
         } catch (IOException e) {
             return new ArrayList<>();
         }
