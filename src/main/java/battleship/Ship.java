@@ -397,14 +397,14 @@ public abstract class Ship implements IShip
     @Override
     public void shoot(IPosition pos)
     {
-		assert pos != null;
-		assert pos.isInside();
+        assert pos != null;
+        assert pos.isInside();
 
-		for (IPosition position : getPositions())
-		{
-			if (position.equals(pos))
-				position.shoot();
-		}
+        for (IPosition position : getPositions())
+        {
+            if (position.equals(pos))
+                position.shoot();
+        }
     }
 
 	/**
