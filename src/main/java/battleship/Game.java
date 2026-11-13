@@ -248,15 +248,11 @@ public class Game implements IGame
 		IPosition newShot = null;
 		if (candidateShots.size() >= Game.NUMBER_SHOTS)
 			while (shots.size() < Game.NUMBER_SHOTS) {
-				newShot = candidateShots.get(random.nextInt(candidateShots.size()));
-				if (!shots.contains(newShot))
-					shots.add(newShot);
+				newShot = addRandomShot(random, candidateShots, shots);
 			}
 		else {
 			while (shots.size() < candidateShots.size()) {
-				newShot = candidateShots.get(random.nextInt(candidateShots.size()));
-				if (!shots.contains(newShot))
-					shots.add(newShot);
+				newShot = addRandomShot(random, candidateShots, shots);
 			}
 			while (shots.size() < Game.NUMBER_SHOTS)
 				shots.add(newShot);
@@ -270,6 +266,14 @@ public class Game implements IGame
 		this.fireShots(shots);
 
 		return Game.jsonShots(shots);
+	}
+
+	private static IPosition addRandomShot(Random random, List<IPosition> candidateShots, List<IPosition> shots) {
+		IPosition newShot;
+		newShot = candidateShots.get(random.nextInt(candidateShots.size()));
+		if (!shots.contains(newShot))
+			shots.add(newShot);
+		return newShot;
 	}
 
 
