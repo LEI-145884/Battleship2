@@ -8,7 +8,6 @@
 | `Game` (fields `countInvalidShots`, `countRepeatedShots`, `countHits`, `countSinks`) | Unnecessary boxing (`Integer` counters returned as `int`) | Type Migration | 145884 |
 | `Game::getRemainingShips` | Redundant temporary variable (`floatingShips` used only once) | Inline Variable | 145884 |
 | `Fleet::addShip` | Complex conditional (three conditions in one `if`) | Introduce Variable | 145884 |
-| `Fleet::createRandom` | Magic values (literal array of ship types inside the method) | Introduce Constant | 145884 |
 | Move::processEnemyFire (building of the verbose summary message) | Long Method (Qodana: Overly complex method, cyclomatic complexity = 37; too long, 77 statements) | Extract Method | 145883 |
 | Move::processEnemyFire (loop over sunkBoatsCount) | Redundant temporary variable (boatName used only once) | Inline Variable | 145883 |
 | PdfExporter::exportMoves | Magic numbers (750, 50, 40, 20, 18, 12 for page layout and font sizes); Qodana: method too long, 32 statements | Introduce Constant | 145883 |
