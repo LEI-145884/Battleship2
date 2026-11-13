@@ -619,8 +619,8 @@ public class GameTest {
 		@Test
 		@DisplayName("printBoard() with a null fleet or null moves fails the assertion")
 		void nullArguments() {
-			assertThrows(AssertionError.class, () -> Game.printBoard(null, List.of(), false, false));
-			assertThrows(AssertionError.class, () -> Game.printBoard(new Fleet(), null, false, false));
+			assertThrows(AssertionError.class, () -> BoardPrinter.printBoard(null, List.of(), false, false));
+			assertThrows(AssertionError.class, () -> BoardPrinter.printBoard(new Fleet(), null, false, false));
 		}
 
 		@Test
