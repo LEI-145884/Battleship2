@@ -172,10 +172,9 @@ public class Move implements IMove {
 
                 if (!hitsPerBoat.isEmpty()) {
                     for (Map.Entry<String, Integer> entry : hitsPerBoat.entrySet()) {
-                        String boatName = entry.getKey();
                         int hits = entry.getValue();
-                        if (!sunkBoatsCount.containsKey(boatName)) {
-                            output.append(hits).append(" tiro").append(hits > 1 ? "s" : "").append(" num(a) ").append(boatName).append(" + ");
+                        if (!sunkBoatsCount.containsKey(entry.getKey())) {
+                            output.append(hits).append(" tiro").append(hits > 1 ? "s" : "").append(" num(a) ").append(entry.getKey()).append(" + ");
                         }
                     }
                 }
