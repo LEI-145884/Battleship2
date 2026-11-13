@@ -44,11 +44,11 @@ public enum Compass
 	/**
 	 * Instantiates a new Compass.
 	 *
-	 * @param c the c
+	 * @param directionChar the directionChar
 	 */
-	Compass(char c)
+	Compass(char directionChar)
     {
-	this.c = c;
+	this.c = directionChar;
     }
 
 	/**
