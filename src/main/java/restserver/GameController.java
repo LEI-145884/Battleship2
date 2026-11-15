@@ -133,9 +133,8 @@ public class GameController {
 
 		// ── 6. AI fires back — calls student's callback (m2a + m2b) ─────────
 		List<IPosition> aiShots = aiStrategy.computeShots(game);
-		boolean callbackOk = callbackClient.sendShots(session, aiShots);
 
-		if (!callbackOk) {
+        if (!callbackClient.sendShots(session, aiShots)) {
 			// Callback failed — warn but don't crash the student's turn
 			System.err.printf("[%s] WARNING: callback to '%s' failed. AI shots skipped.%n",
 					gameId, session.getCallbackUrl());
