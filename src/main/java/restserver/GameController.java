@@ -1,6 +1,7 @@
 package restserver;
 
 import battleship.*;
+import org.jetbrains.annotations.NotNull;
 import restserver.Dtos.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -163,23 +164,7 @@ public class GameController {
 			IGame.ShotResult sr = game.fireSingleShot(pos, repeatedInTurn);
 			alreadyThisTurn.add(pos);
 
-			ShotResult dto  = new ShotResult();
-			dto.row         = String.valueOf(pos.getClassicRow());
-			dto.column      = pos.getClassicColumn();
-
-			if (!sr.valid()) {
-				dto.outcome = "INVALID";
-			} else if (sr.repeated()) {
-				dto.outcome = "REPEATED";
-			} else if (sr.ship() == null) {
-				dto.outcome = "MISS";
-			} else if (sr.sunk()) {
-				dto.outcome  = "SUNK";
-				dto.shipType = sr.ship().getCategory();
-			} else {
-				dto.outcome  = "HIT";
-				dto.shipType = sr.ship().getCategory();
-			}
+			ShotResult dto = toShotResultDto(pos, sr);
 			results.add(dto);
 		}
 
@@ -189,6 +174,27 @@ public class GameController {
 		response.gameStatus    = "ONGOING";
 		response.winner        = null;
 		return response;
+	}
+
+	private static @NotNull ShotResult toShotResultDto(IPosition pos, IGame.ShotResult sr) {
+		ShotResult dto  = new ShotResult();
+		dto.row         = String.valueOf(pos.getClassicRow());
+		dto.column      = pos.getClassicColumn();
+
+		if (!sr.valid()) {
+			dto.outcome = "INVALID";
+		} else if (sr.repeated()) {
+			dto.outcome = "REPEATED";
+		} else if (sr.ship() == null) {
+			dto.outcome = "MISS";
+		} else if (sr.sunk()) {
+			dto.outcome  = "SUNK";
+			dto.shipType = sr.ship().getCategory();
+		} else {
+			dto.outcome  = "HIT";
+			dto.shipType = sr.ship().getCategory();
+		}
+		return dto;
 	}
 
 	/** Convenience helper to build a JSON error response. */
