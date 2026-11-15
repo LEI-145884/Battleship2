@@ -19,6 +19,7 @@ import java.util.List;
 @RestController
 public class GameController {
 
+	private static final int MAX_COLUMN = 10;
 	private final GameRegistry registry;
 	private final CallbackClient callbackClient;
 	private final AiShotStrategy aiStrategy;
@@ -108,7 +109,7 @@ public class GameController {
 		// ── 3. Convert DTO positions → IPosition list ────────────────────────
 		List<IPosition> positions = new ArrayList<>();
 		for (ShotPosition sp : request.shots) {
-			if (sp.row == null || sp.row.isBlank() || sp.column < 1 || sp.column > 10) {
+			if (sp.row == null || sp.row.isBlank() || sp.column < 1 || sp.column > MAX_COLUMN) {
 				return error(HttpStatus.BAD_REQUEST,
 						"Invalid position: row='" + sp.row + "' column=" + sp.column);
 			}
