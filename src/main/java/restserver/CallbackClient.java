@@ -88,19 +88,19 @@ public class CallbackClient {
 		}
 
 		// ── 3. Parse m2b response ────────────────────────────────────────────
-		ShotResponse m2b;
+		ShotResponse studentResponse;
 		try {
-			m2b = mapper.readValue(response.body(), ShotResponse.class);
+			studentResponse = mapper.readValue(response.body(), ShotResponse.class);
 		} catch (IOException e) {
 			System.err.println("[Callback] Failed to parse student m2b response: " + e.getMessage());
 			return false;
 		}
 
 		// ── 4. Record the AI's move in the game (for strategy state tracking) ─
-		recordAiMove(session.getGame(), aiShots, m2b);
+		recordAiMove(session.getGame(), aiShots, studentResponse);
 
 		// ── 5. Check if AI won ────────────────────────────────────────────────
-		if (m2b.shipsRemaining == 0 || "GAME_OVER".equals(m2b.gameStatus)) {
+		if (studentResponse.shipsRemaining == 0 || "GAME_OVER".equals(studentResponse.gameStatus)) {
 			session.markAiWins();
 			System.out.printf("[%s] GAME OVER — AI wins against '%s'!%n",
 					session.getGameId(), session.getPlayerName());
