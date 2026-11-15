@@ -103,7 +103,7 @@ class GameControllerTest {
     }
 
     private static String errorOf(ResponseEntity<?> r) {
-        return ((ErrorResponse) r.getBody()).error;
+        return ((ErrorResponse) r.getBody()).getError();
     }
 
     private static int status(ResponseEntity<?> r) {

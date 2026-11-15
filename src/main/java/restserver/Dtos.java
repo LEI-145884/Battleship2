@@ -125,7 +125,8 @@ public class Dtos {
 	 * { "error": "Game not found: abc-123" }
 	 */
 	public static class ErrorResponse {
-		public String error;
+		private String error;
 		public ErrorResponse(String error) { this.error = error; }
+		public String getError() { return error; }
 	}
 }
