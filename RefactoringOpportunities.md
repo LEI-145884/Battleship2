@@ -13,3 +13,10 @@
 | PdfExporter::exportMoves | Magic numbers (750, 50, 40, 20, 18, 12 for page layout and font sizes); Qodana: method too long, 32 statements | Introduce Constant | 145883 |
 | Position::isAdjacentTo | Complex expression (two Math.abs(...) <= 1 comparisons in one return) | Introduce Variable | 145883 |
 | Compass (field c and constructor parameter c) | Mysterious Name | Rename | 145883 |
+| `CallbackClient::sendShots` | Mysterious Name (variable `m2b` is a protocol code, not a meaningful name) | Rename | 122708 |
+| `GameController::receiveShots` | Magic number (`10` as the maximum column in the position validation) | Introduce Constant | 122708 |
+| `GameController::evaluateShots` | Long Method (conversion of each shot result to a DTO is mixed into the loop) | Extract Method | 122708 |
+| `AiShotStrategy::getHitButNotSunkPositions` | Duplicated expression (`move.getShotResults()` evaluated three times) | Introduce Variable | 122708 |
+| `GameController::receiveShots` | Redundant temporary variable (`callbackOk` used only once) | Inline Variable | 122708 |
+| `AiShotStrategy::getHitButNotSunkPositions` | Unused parameter (`alreadyShot` is never read) | Change Signature | 122708 |
+| `Dtos.ErrorResponse` | Data Class / Public field (`error` is public) | Encapsulate Fields | 122708 |
