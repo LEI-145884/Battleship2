@@ -1,6 +1,7 @@
 package restserver;
 
 import battleship.*;
+import org.jetbrains.annotations.NotNull;
 import restserver.Dtos.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ import java.util.List;
 @RestController
 public class GameController {
 
+	private static final int MAX_COLUMN = 10;
 	private final GameRegistry registry;
 	private final CallbackClient callbackClient;
 	private final AiShotStrategy aiStrategy;
@@ -108,7 +110,7 @@ public class GameController {
 		// ── 3. Convert DTO positions → IPosition list ────────────────────────
 		List<IPosition> positions = new ArrayList<>();
 		for (ShotPosition sp : request.shots) {
-			if (sp.row == null || sp.row.isBlank() || sp.column < 1 || sp.column > 10) {
+			if (sp.row == null || sp.row.isBlank() || sp.column < 1 || sp.column > MAX_COLUMN) {
 				return error(HttpStatus.BAD_REQUEST,
 						"Invalid position: row='" + sp.row + "' column=" + sp.column);
 			}
@@ -131,9 +133,8 @@ public class GameController {
 
 		// ── 6. AI fires back — calls student's callback (m2a + m2b) ─────────
 		List<IPosition> aiShots = aiStrategy.computeShots(game);
-		boolean callbackOk = callbackClient.sendShots(session, aiShots);
 
-		if (!callbackOk) {
+        if (!callbackClient.sendShots(session, aiShots)) {
 			// Callback failed — warn but don't crash the student's turn
 			System.err.printf("[%s] WARNING: callback to '%s' failed. AI shots skipped.%n",
 					gameId, session.getCallbackUrl());
@@ -162,23 +163,7 @@ public class GameController {
 			IGame.ShotResult sr = game.fireSingleShot(pos, repeatedInTurn);
 			alreadyThisTurn.add(pos);
 
-			ShotResult dto  = new ShotResult();
-			dto.row         = String.valueOf(pos.getClassicRow());
-			dto.column      = pos.getClassicColumn();
-
-			if (!sr.valid()) {
-				dto.outcome = "INVALID";
-			} else if (sr.repeated()) {
-				dto.outcome = "REPEATED";
-			} else if (sr.ship() == null) {
-				dto.outcome = "MISS";
-			} else if (sr.sunk()) {
-				dto.outcome  = "SUNK";
-				dto.shipType = sr.ship().getCategory();
-			} else {
-				dto.outcome  = "HIT";
-				dto.shipType = sr.ship().getCategory();
-			}
+			ShotResult dto = toShotResultDto(pos, sr);
 			results.add(dto);
 		}
 
@@ -188,6 +173,27 @@ public class GameController {
 		response.gameStatus    = "ONGOING";
 		response.winner        = null;
 		return response;
+	}
+
+	private static @NotNull ShotResult toShotResultDto(IPosition pos, IGame.ShotResult sr) {
+		ShotResult dto  = new ShotResult();
+		dto.row         = String.valueOf(pos.getClassicRow());
+		dto.column      = pos.getClassicColumn();
+
+		if (!sr.valid()) {
+			dto.outcome = "INVALID";
+		} else if (sr.repeated()) {
+			dto.outcome = "REPEATED";
+		} else if (sr.ship() == null) {
+			dto.outcome = "MISS";
+		} else if (sr.sunk()) {
+			dto.outcome  = "SUNK";
+			dto.shipType = sr.ship().getCategory();
+		} else {
+			dto.outcome  = "HIT";
+			dto.shipType = sr.ship().getCategory();
+		}
+		return dto;
 	}
 
 	/** Convenience helper to build a JSON error response. */

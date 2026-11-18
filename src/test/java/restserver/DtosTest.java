@@ -45,7 +45,7 @@ class DtosTest {
     @DisplayName("ErrorResponse constructor: stores the message")
     void errorResponseConstructor() {
         ErrorResponse e = new ErrorResponse("Game not found: abc");
-        assertEquals("Game not found: abc", e.error, "Error: message was not stored");
+        assertEquals("Game not found: abc", e.getError(), "Error: message was not stored");
     }
 
     @Test
