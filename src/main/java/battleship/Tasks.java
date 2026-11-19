@@ -201,8 +201,8 @@ public class Tasks {
 
         String shipKind = in.next();
         Position pos = readPosition(in);
-        char c = in.next().charAt(0);
-        Compass bearing = Compass.charToCompass(c);
+        char bearingChar = in.next().charAt(0);
+        Compass bearing = Compass.charToCompass(bearingChar);
         return Ship.buildShip(shipKind, bearing, pos);
     }
 
