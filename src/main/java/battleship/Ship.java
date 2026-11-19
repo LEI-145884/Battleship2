@@ -243,9 +243,11 @@ public abstract class Ship implements IShip
     public int getTopMostPos()
     {
 	int top = getPositions().get(0).getRow();
-	for (int i = 1; i < getSize(); i++)
-	    if (getPositions().get(i).getRow() < top)
-		top = getPositions().get(i).getRow();
+	for (int i = 1; i < getSize(); i++) {
+        int row = getPositions().get(i).getRow();
+        if (row < top)
+        top = row;
+    }
 	return top;
     }
 
