@@ -80,9 +80,9 @@ class ScoreboardServiceTest {
     void scoreEntryDefault() {
         ScoreboardService.ScoreEntry e = new ScoreboardService.ScoreEntry();
         assertAll("default entry",
-                () -> assertNull(e.date, "Error: date should be null."),
-                () -> assertEquals(0, e.totalShots, "Error: totalShots should be 0."),
-                () -> assertEquals(0, e.hits, "Error: hits should be 0."));
+                () -> assertNull(e.getDate(), "Error: date should be null."),
+                () -> assertEquals(0, e.getTotalShots(), "Error: totalShots should be 0."),
+                () -> assertEquals(0, e.getHits(), "Error: hits should be 0."));
     }
 
     @Test
@@ -90,11 +90,11 @@ class ScoreboardServiceTest {
     void scoreEntryValues() {
         ScoreboardService.ScoreEntry e = new ScoreboardService.ScoreEntry(10, 5);
         assertAll("entry",
-                () -> assertEquals(10, e.totalShots, "Error: totalShots should be 10."),
-                () -> assertEquals(5, e.hits, "Error: hits should be 5."),
-                () -> assertNotNull(e.date, "Error: date should be set."),
-                () -> assertTrue(e.date.matches("\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}"),
-                        "Error: date has an unexpected format: " + e.date));
+                () -> assertEquals(10, e.getTotalShots(), "Error: totalShots should be 10."),
+                () -> assertEquals(5, e.getHits(), "Error: hits should be 5."),
+                () -> assertNotNull(e.getDate(), "Error: date should be set."),
+                () -> assertTrue(e.getDate().matches("\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}"),
+                        "Error: date has an unexpected format: " + e.getDate()));
     }
 
     // ----------------------------------------------------------- loadScores
@@ -113,10 +113,10 @@ class ScoreboardServiceTest {
         List<ScoreboardService.ScoreEntry> scores = ScoreboardService.loadScores();
         assertAll("entries",
                 () -> assertEquals(2, scores.size(), "Error: expected 2 entries."),
-                () -> assertEquals("2026-01-01 10:00:00", scores.get(0).date, "Error: wrong date."),
-                () -> assertEquals(30, scores.get(0).totalShots, "Error: wrong totalShots."),
-                () -> assertEquals(20, scores.get(0).hits, "Error: wrong hits."),
-                () -> assertEquals(18, scores.get(1).hits, "Error: wrong hits in 2nd entry."));
+                () -> assertEquals("2026-01-01 10:00:00", scores.get(0).getDate(), "Error: wrong date."),
+                () -> assertEquals(30, scores.get(0).getTotalShots(), "Error: wrong totalShots."),
+                () -> assertEquals(20, scores.get(0).getHits(), "Error: wrong hits."),
+                () -> assertEquals(18, scores.get(1).getHits(), "Error: wrong hits in 2nd entry."));
     }
 
     @Test
@@ -138,8 +138,8 @@ class ScoreboardServiceTest {
         assertAll("saved game",
                 () -> assertTrue(Files.exists(FILE), "Error: the file should have been created."),
                 () -> assertEquals(1, scores.size(), "Error: expected exactly 1 entry."),
-                () -> assertEquals(30, scores.get(0).totalShots, "Error: wrong totalShots."),
-                () -> assertEquals(20, scores.get(0).hits, "Error: wrong hits."),
+                () -> assertEquals(30, scores.get(0).getTotalShots(), "Error: wrong totalShots."),
+                () -> assertEquals(20, scores.get(0).getHits(), "Error: wrong hits."),
                 () -> assertTrue(out().contains("guardado com sucesso"), "Error: success message is missing."));
     }
 
@@ -152,7 +152,7 @@ class ScoreboardServiceTest {
         List<ScoreboardService.ScoreEntry> scores = ScoreboardService.loadScores();
         assertAll("two games",
                 () -> assertEquals(2, scores.size(), "Error: expected 2 entries."),
-                () -> assertEquals(25, scores.get(1).totalShots, "Error: 2nd entry should be the last saved."));
+                () -> assertEquals(25, scores.get(1).getTotalShots(), "Error: 2nd entry should be the last saved."));
     }
 
     @Test
