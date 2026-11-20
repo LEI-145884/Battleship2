@@ -243,9 +243,11 @@ public abstract class Ship implements IShip
     public int getTopMostPos()
     {
 	int top = getPositions().get(0).getRow();
-	for (int i = 1; i < getSize(); i++)
-	    if (getPositions().get(i).getRow() < top)
-		top = getPositions().get(i).getRow();
+	for (int i = 1; i < getSize(); i++) {
+        int row = getPositions().get(i).getRow();
+        if (row < top)
+        top = row;
+    }
 	return top;
     }
 
@@ -430,5 +432,26 @@ public abstract class Ship implements IShip
     public String toString()
     {
 	return "[" + category + " " + bearing + " " + pos + "]";
+    }
+
+    protected void fillPositions(Compass bearing, IPosition pos) {
+        switch (bearing) {
+            case NORTH:
+                for (int r = 0; r < this.getSize(); r++)
+                    getPositions().add(new Position(pos.getRow() + r, pos.getColumn()));
+                break;
+            case SOUTH:
+                for (int r = 0; r < this.getSize(); r++)
+                    getPositions().add(new Position(pos.getRow() + r, pos.getColumn()));
+                break;
+            case EAST:
+                for (int c = 0; c < this.getSize(); c++)
+                    getPositions().add(new Position(pos.getRow(), pos.getColumn() + c));
+                break;
+            case WEST:
+                for (int c = 0; c < this.getSize(); c++)
+                    getPositions().add(new Position(pos.getRow(), pos.getColumn() + c));
+                break;
+        }
     }
 }

@@ -33,6 +33,8 @@ public class Tasks {
     private static final String STATUS = "estado";
     private static final String SIMULA = "simula";
     private static final String SCOREBOARD = "scoreboard";
+    public static final int TOTAL_SHOTS = 30;
+    public static final int HITS = 20;
 
     /**
      * This task also tests the fighting element of a round of three shots
@@ -91,7 +93,7 @@ public class Tasks {
                         if (game.getRemainingShips() == 0) {
                             game.over();
                             // Guarda o jogo terminado no JSON do Scoreboard
-                            ScoreboardService.saveGame(30, 20);
+                            ScoreboardService.saveGame(TOTAL_SHOTS, HITS);
                             System.exit(0);
                         }
                     }
@@ -117,7 +119,7 @@ public class Tasks {
                         if (game.getRemainingShips() == 0) {
                             game.over();
                             // Guarda o jogo simulado no JSON do Scoreboard
-                            ScoreboardService.saveGame(30, 20);
+                            ScoreboardService.saveGame(TOTAL_SHOTS, HITS);
                             System.exit(0);
                         }
                     }
@@ -199,8 +201,8 @@ public class Tasks {
 
         String shipKind = in.next();
         Position pos = readPosition(in);
-        char c = in.next().charAt(0);
-        Compass bearing = Compass.charToCompass(c);
+        char bearingChar = in.next().charAt(0);
+        Compass bearing = Compass.charToCompass(bearingChar);
         return Ship.buildShip(shipKind, bearing, pos);
     }
 

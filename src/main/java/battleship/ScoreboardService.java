@@ -14,15 +14,39 @@ public class ScoreboardService {
 
     // Classe auxiliar simples para guardar cada registo
     public static class ScoreEntry {
-        public String date;
-        public int totalShots;
-        public int hits;
+        private String date;
+        private int totalShots;
+        private int hits;
 
         public ScoreEntry() {} // Necessário para o Jackson
 
         public ScoreEntry(int totalShots, int hits) {
-            this.date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+            this.setDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+            this.setTotalShots(totalShots);
+            this.setHits(hits);
+        }
+
+        public String getDate() {
+            return date;
+        }
+
+        public void setDate(String date) {
+            this.date = date;
+        }
+
+        public int getTotalShots() {
+            return totalShots;
+        }
+
+        public void setTotalShots(int totalShots) {
             this.totalShots = totalShots;
+        }
+
+        public int getHits() {
+            return hits;
+        }
+
+        public void setHits(int hits) {
             this.hits = hits;
         }
     }
@@ -60,7 +84,7 @@ public class ScoreboardService {
         } else {
             for (int i = 0; i < scores.size(); i++) {
                 ScoreEntry s = scores.get(i);
-                System.out.printf("Jogo #%d | Data: %s | Tiros: %d | Acertos: %d%n", (i + 1), s.date, s.totalShots, s.hits);
+                System.out.printf("Jogo #%d | Data: %s | Tiros: %d | Acertos: %d%n", (i + 1), s.getDate(), s.getTotalShots(), s.getHits());
             }
         }
         System.out.println("========================================\n");
